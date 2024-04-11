@@ -139,7 +139,7 @@ void merge(int arr[], int low, int mid, int high){
     int size = high - low + 1;
     int *a = (int *)malloc(size * sizeof(int));
     int left = low, right = mid + 1, idx = 0;
-     printf("merging");
+
     while(left <= mid && right <= high){
         if(arr[left] < arr[right])
             a[idx++] = arr[left++];
@@ -153,6 +153,7 @@ void merge(int arr[], int low, int mid, int high){
     while(right <= high)
         a[idx++] = arr[right++];
 
+
     idx = 0;
     for (int index = low; index <= high; index++)
         arr[index] = a[idx++];
@@ -161,7 +162,6 @@ void merge(int arr[], int low, int mid, int high){
 }
 
 void mergeSort(int arr[], int low, int high){
-    printf("Here");
     if(low < high){
         int mid = low + (high - low) / 2;
         mergeSort(arr, low, mid);
@@ -175,7 +175,7 @@ void sort(List *list){
 }
 
 int main(){
-    List list;
+    List list, list2;
     char choice;
     int element, cap, index;
 
@@ -233,7 +233,6 @@ int main(){
                 delete_value(&list, element);
                 break;
             case 'i':
-                List list2;
                 printf("\nEnter the capacity of second list: ");
                 scanf("%d", &cap);
                 create(&list2, cap);
@@ -242,7 +241,10 @@ int main(){
                 while (stop != 'q') {
                     printf("\nEnter the element: ");
                     scanf("%d", &element);
+                    fflush(stdin);
+                    
                     insert(&list2, element);
+
                     printf("\nEnter 'q' to stop: ");
                     scanf("%c", &stop);
                 }
@@ -250,7 +252,6 @@ int main(){
                 destroy(&list2);
                 break;
             case 'j':
-                List list2;
                 printf("\nEnter the capacity of second list: ");
                 scanf("%d", &cap);
                 create(&list2, cap);
