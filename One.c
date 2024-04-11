@@ -176,19 +176,103 @@ void sort(List *list){
 
 int main(){
     List list;
-    create(&list, 10);
-    insert(&list, 2);
-    insert(&list, 7);
-    insert(&list, 4);
-    insert(&list, 10);
-    insert(&list, 4);
-    display(&list);
-    index_of(&list, 4);
-    reverse(&list);
-    display(&list);
-    sort(&list);
-    display(&list);
-    destroy(&list);
+    char choice;
+    int element, cap, index;
+
+    do {
+        printf("\nMenu:\n");
+        printf("a) Create\n");
+        printf("b) Display the entire list\n");
+        printf("c) Count (total number of elements in the list)\n");
+        printf("d) Reverse the list\n");
+        printf("e) Index of a given element\n");
+        printf("f) Indexed element\n");
+        printf("g) Insert\n");
+        printf("h) Delete\n");
+        printf("i) Merge\n");
+        printf("j) Split\n");
+        printf("k) Sort\n");
+        printf("q) Exit\n");
+
+        printf("Enter your choice: ");
+        scanf(" %c", &choice);
+
+        switch (choice) {
+            case 'a':
+                printf("\nEnter capacity: ");
+                scanf("%d", &cap);
+                create(&list, cap);
+                break;
+            case 'b':
+                display(&list);
+                break;
+            case 'c':
+                count(&list);
+                break;
+            case 'd':
+                reverse(&list);
+                break;
+            case 'e':
+                printf("Enter the element: ");
+                scanf("%d", &element);
+                index_of(&list, element);
+                break;
+            case 'f':
+                printf("Enter the index: ");
+                scanf("%d", &index);
+                indexed_element(&list, index);
+                break;
+            case 'g':
+                printf("Enter the element to insert: ");
+                scanf("%d", &element);
+                insert(&list, element);
+                break;
+            case 'h':
+                printf("Enter the element to delete: ");
+                scanf("%d", &element);
+                delete_value(&list, element);
+                break;
+            case 'i':
+                List list2;
+                printf("\nEnter the capacity of second list: ");
+                scanf("%d", &cap);
+                create(&list2, cap);
+                printf("Enter elements for second list (enter -1 to stop):\n");
+                char stop = 'a';
+                while (stop != 'q') {
+                    printf("\nEnter the element: ");
+                    scanf("%d", &element);
+                    insert(&list2, element);
+                    printf("\nEnter 'q' to stop: ");
+                    scanf("%c", &stop);
+                }
+                mergeLists(&list, &list2);
+                destroy(&list2);
+                break;
+            case 'j':
+                List list2;
+                printf("\nEnter the capacity of second list: ");
+                scanf("%d", &cap);
+                create(&list2, cap);
+                printf("Enter the index to split at: ");
+                scanf("%d", &index);
+                split(&list, &list2, index);
+                printf("First list after split:\n");
+                display(&list);
+                printf("Second list after split:\n");
+                display(&list2);
+                destroy(&list2);
+                break;
+            case 'k':
+                sort(&list);
+                break;
+            case 'q':
+                printf("Exiting program...\n");
+                break;
+            default:
+                printf("Invalid choice\n");
+        }
+    } while (choice != 'q');
 
     return 0;
 }
